@@ -8,6 +8,8 @@ class MainViewModel : BaseViewModel() {
     }
 
     fun userList() {
-        withLiveData(exampleLiveData, mainDataSource.getUserList())
+        withLiveData(exampleLiveData){
+            mainDataSource.getUserList()
+        }
     }
 }

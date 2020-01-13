@@ -1,6 +1,6 @@
 package com.demo.coroutineexample
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
+//import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.HttpUrl
 import okhttp3.Interceptor
@@ -20,7 +20,7 @@ class MainDataSource {
 
         val retrofit = Retrofit.Builder()
             .baseUrl(getUrl())    //http://dummy.restapiexample.com/api/v1/
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
+//            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
             .client(
                 OkHttpClient.Builder()
@@ -44,8 +44,10 @@ class MainDataSource {
     }
 
 
-    fun getUserList(): Deferred<ResponseBody<MutableList<User>>> {
-        return demoService.getEmployeeList()
+    suspend fun getUserList(): ResponseBody<MutableList<User>> {
+        val map = hashMapOf<String,String>()
+        map["mocky-delay"] = "10000ms"
+        return demoService.getEmployeeList(map)
     }
 
     fun getAuthenticationExceptionInter(): Interceptor {

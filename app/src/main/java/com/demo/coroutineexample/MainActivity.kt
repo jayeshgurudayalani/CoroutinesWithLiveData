@@ -34,7 +34,7 @@ class MainActivity : BaseActivity() {
     }
 
     private fun onErrorFromApi(throwable: Throwable): Boolean {
-        if (throwable is ServerException && throwable.code == "0") {
+        if (throwable is ServerException && throwable.code == "2") {
             Log.e("MainActivity", throwable.message)
             return false
         }
